@@ -1,10 +1,12 @@
-#coding=utf-8
+# coding=utf-8
 from django import forms
 from django.core.exceptions import ValidationError
+
 
 def word_validator(comment):
     if len(comment) < 4:
         raise ValidationError("not enough words")
+
 
 def comment_validator(comment):
     keywords = [u"发票", u"钱"]
@@ -12,9 +14,11 @@ def comment_validator(comment):
         if keyword in comment:
             raise ValidationError("Your comment contains invalid words,please check it again.")
 
+
 def length_validator(comment):
     if len(comment) != 11:
         raise ValidationError('手机号不正确。')
+
 
 def people_num(num):
     if int(num) < 1:
@@ -22,7 +26,13 @@ def people_num(num):
     if int(num) > 13:
         raise ValidationError('So Sorry.我们是一家Fashion的歌厅。您的容量有些拥挤喽。(人数多于13人，可电话预定。110-12345678)')
 
+
 class ReserveForm(forms.Form):
+    ROOM_TYPE = (
+        ('small', '小包'),
+        ('middle', '中包'),
+        ('large', '大包')
+    )
     name = forms.CharField(max_length=50, label='姓名')
     # phone = forms.CharField(
     #     widget=forms.Textarea(),
@@ -33,10 +43,9 @@ class ReserveForm(forms.Form):
     #     )
     phone = forms.CharField(
         label='手机',
-        validators = [length_validator]
+        validators=[length_validator]
     )
-    num_people = forms.CharField(
-        label='人数',
-        max_length=2,
-        validators = [people_num],
+    room_type = forms.IntegerField(
+        label='房间类型',
+        widget=forms.Select(choices=ROOM_TYPE),
     )

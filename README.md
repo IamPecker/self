@@ -40,3 +40,12 @@ CREATE TABLE `order`(
     `finish_time` datetime(6) NOT NULL,
     PRIMARY KEY(`id`)
     )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE `user_room`(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    'phone' int(11) NOT NULL,
+    `start_time` int(11) NOT NULL,
+    `end_time` datetime(6) NOT NULL,
+    PRIMARY KEY(`id`)
+    )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
