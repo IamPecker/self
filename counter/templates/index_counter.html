@@ -56,9 +56,9 @@
                 </p>
                 {% if request.user.is_authenticated %}
                 <div class="ui buttons">
-                  <a href="{% url 'reserve_website' %}" type="button" name="button" class="ui red circular button" value="">预定</a>
+                  <a href="{% url 'reserve_website' %}" type="button" name="button" class="ui red circular button" value="">预定房间</a>
                   <div class="or"></div>
-                  <a href="{% url 'search_website' %}" type="button" name="button" class="ui red circular button" value="">查询</a>
+                  <a href="{% url 'search_website' %}" type="button" name="button" class="ui red circular button" value="">房间价格查询</a>
                 </div>
                 {% else %}
                   <a href="{% url 'login' %}" style='width:220px' type="button" name="button" class="ui red circular button" value="">注册一个</a>

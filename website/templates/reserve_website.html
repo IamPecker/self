@@ -1,217 +1,129 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-        <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
-        <link rel="stylesheet" href="{% static 'css/list_custom.css' %}"  media="screen" title="no title" charset="utf-8">
-        <script src='{% static "js/vue1.js" %}'></script>
-        <script src='{% static "js/reqwest.js" %}'></script>
-        <style type="text/css">
-            body {
-                background: url({% static 'images/super_blur_back2.jpg' %});
-                background-size: cover;
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/list_custom.css' %}" media="screen" title="no title" charset="utf-8">
+    <script src='{% static "js/vue1.js" %}'></script>
+    <script src='{% static "js/reqwest.js" %}'></script>
+    <script type="text/javascript">
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
             }
-
-            .ui.grid.divided.segment.container{
-                min-height: 400px;
-                width:600px !important;
-                border:rgba(255, 0, 0, 0);
-                position: absolute;
-                left: 50%;
-                top:40%;
-                transform: translate(-50%,-50%);
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
             }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
+        }
+    </script>
+    <style type="text/css">
+        body {
+            background: url({% static 'images/super_blur_back2.jpg' %});
+            background-size: cover;
+        }
 
-            .five.wide.column {
-                background: url({% static 'images/red_regi.jpg'  %});
-                background-size: cover;
-                background-position: 60% 0%;
-            }
+        .ui.grid.divided.segment.container {
+            min-height: 400px;
+            width: 600px !important;
+            border: rgba(255, 0, 0, 0);
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+        }
 
-            form {
-                margin-top: 60px;
-            }
-            h1,h3,h4{
-                font-family: 'Play', sans-serif !important;
+        .five.wide.column {
+            background: url({% static 'images/red_regi.jpg'  %});
+            background-size: cover;
+            background-position: 60% 0%;
+        }
 
-            }
-        </style>
+        form {
+            margin-top: 60px;
+        }
 
-    </head>
-    {% verbatim %}
-    <body id='app'>
+        h1, h3, h4 {
+            font-family: 'Play', sans-serif !important;
 
-        <div class="ui grid divided segment container">
-            <div class="five wide  column">
-              <a href="/website/index/">
-                <h4 class="ui inverted header">
-                  <i class="angle left  icon"></i>
+        }
+    </style>
 
-                </h4>
-              </a>
-                <h1 class="ui inverted center aligned header" style="font-size: 40px;margin-top:55px">
-                    <p class="sub header">
-                        Welcome to
-                    </p>
-                    BASH
-                </h1>
+</head>
+{% verbatim %}
+<body id='app'>
 
+<div class="ui grid divided segment container">
+    <div class="five wide  column">
+        <a href="/website/index/">
+            <h4 class="ui inverted header">
+                <i class="angle left  icon"></i>
+
+            </h4>
+        </a>
+        <h1 class="ui inverted center aligned header" style="font-size: 40px;margin-top:55px">
+            <p class="sub header">
+                Welcome to
+            </p>
+            BASH
+        </h1>
+
+    </div>
+
+    <div class="eleven wide column">
+
+        <form class="ui form error" method="POST" action="">
+            <h3 class="ui dividing header">欲购从速啦</h3>
+            <div class="{{ username_com }} field">
+                <label>姓名:</label>
+                <div class=" fields">
+                    <input type="text" v-model="modal.myUser" name="name" value="" placeholder="请输入您的姓名" required>
+                </div>
+            </div>
+            <div class="{{ computed_ph }} field" name="phone">
+                <label>手机号:</label>
+                <div class="fields">
+                    <input type="number" v-model="modal.myPhone" name="" value="" placeholder="请输入您的手机号" required>
+                </div>
+            </div>
+            <div class="{{ computed_peo}} field">
+                <label>房间类型:</label>
+                <div class="fields">
+                    <select name="room_type" id="room_type" required>
+                        <option value="small">小包</option>
+                        <option value="middle">中包</option>
+                        <option value="large">大包</option>
+                    </select>
+                </div>
+            </div>
+            <div class="{{ computed_peo}} field">
+                <label>开始时间:</label>
+                <div class="fields">
+                    <input type="datetime" name="start_time " value="2017-05-27 19:00:00" placeholder="" required>
+                </div>
+            </div>
+            <div class="{{ computed_peo}} field">
+                <label>结束时间:</label>
+                <div class="fields">
+                    <input type="datetime" name="end_time" value="2017-05-27 21:00:00" required/>
+                </div>
             </div>
 
-            <div class="eleven wide column">
+            <input class='ui button inverted red right floated' type="submit" name="button">提交</input>
+        </form>
+    </div>
+</div>
 
-                <form class="ui form error"  method="POST">
-                  <h3 class="ui dividing header">欲购从速啦</h3>
-                  <div class="{{ username_com }} field">
-                    <label>姓名:</label>
-                    <div class=" fields">
-                      <input type="text" v-model="modal.myUser" name="" value="" placeholder="请输入您的姓名">
-                    </div>
-                  </div>
-                  <div class="{{ computed_ph }} field">
-                    <label>手机号:</label>
-                    <div class="fields">
-                      <input type="text" v-model="modal.myPhone" name="" value="" placeholder="请输入您的手机号">
-                    </div>
-                  </div>
-                  <div class="{{ computed_peo}} field">
-                    <label>人数:</label>
-                    <div class="fields">{{ debug_my_a }}
-                      <input type="text" v-model="modal.myPeo" name="" value="" placeholder="请输入小伙伴的人数">
-                    </div>
-                  </div>
-                  <button v-on:click="putData" class='ui button inverted red right floated' type="button" name="button">提交</button>
-                  <button type="button" class='ui button' v-on:click="search_void" name="button">one</button>
-                  <label>{{ id }}</label>
-                  {% endverbatim %}
-                  {% csrf_token %}
-
-                  {% verbatim %}
-                  <label> {{ scrf_token }} </label>
-            <!--        {% if form.errors %}
-                        <div class="ui error message">
-                            {{ form.errors }}
-                        </div>
-
-                        {% for field in form  %}
-                            <div class="{{ field.errors|yesno:'error, ' }} field">
-                                {{ field.label }}
-                                {{ field }}
-                            </div>
-                        {% endfor %}
-
-                    {% else %}
-                        {% for field in form  %}
-                            <div class="field">
-                                {{ field.label }}
-                                {{ field }}
-                            </div>
-                        {% endfor %}
-
-                    {% endif %}
-
-                    {% csrf_token %}
-
-                    <button class="ui inverted red circular right floated button" type="submit">Done</button>-->
-                </form>
-            </div>
-        </div>
-        <script>
-          var vm = new Vue({
-            el:'#app',
-            data:{
-              rooms:[],
-              modal:{
-                myUser:'',
-                myPhone:'',
-                myPeo:'',
-              },
-              id:0,
-              csrf:'',
-            },
-            methods:{
-              getData:function(){
-                var self = this;
-                reqwest({
-                  url:"http://localhost:8000/api/room?format=json",
-                  type:"json",
-                  method:'get',
-                  success:function(resp){
-                    self.rooms = resp
-                  },
-                })
-              },
-              debug_my:function(){
-                alert(this.modal.myPeo);
-              },
-
-              putData:function(){
-                this.search_void();
-                var self = this;
-                var id = this.id;
-                reqwest({
-                  url:'/api/room_ch/' + id,
-                  type:'json',
-                  method:'PUT',
-                  data:{
-                    type:self.rooms[i.toString()].type,
-                    is_use:true,
-                    time_use:'',
-                  },
-                  success:function(resp){
-                    console.log(resp);
-                    self.location='/website/index';
-                  },
-                })
-              },
-
-              search_void:function(){
-                var size = 0;
-                for (i in this.rooms){
-                  if (i < 5) {
-                    size = 3;
-                  }else if (i < 8) {
-                    size = 8;
-                  }else {
-                    size = 13;
-                  };
-                  if (this.rooms[i].is_use == false && size >= this.modal.myPeo){
-                    this.id = parseInt(i) + 1;
-                    break;
-                  }
-                };
-              },
-            },
-            computed:{
-              username_com:function(){
-                if ( this.modal.myUser.length > 10){
-                  return 'error ';alert(1);
-                } else {
-                  return '';alert(0);
-                }
-              },
-              computed_ph:function(){
-                if ( this.modal.myPhone.length == 11){
-                  return ''
-                } else {
-                  return 'error '
-                }
-              },
-              computed_peo:function(){
-                if (this.modal.myPeo.length > 13 || this.modal.myPeo.length < 1){
-                  return 'error'
-                } else {
-                  return ''
-                }
-              },
-            },
-            ready:function(){
-              this.getData();
-            },
-          })
-        </script>
-    </body>
-    {% endverbatim %}
+</body>
+{% endverbatim %}
 </html>
