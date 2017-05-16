@@ -49,3 +49,12 @@ CREATE TABLE `user_room`(
     `end_time` datetime(6) NOT NULL,
     PRIMARY KEY(`id`)
     )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE `room_reserve`(
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `room_number` int(11) NOT NULL,
+    `type` varchar(255) NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `current_use` int(1) NOT NULL,
+    PRIMARY KEY(`id`)
+    )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
